@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Retro Game Hub</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="theme-default" data-page="home">
+
+  <!-- Scanline overlay -->
+  <div class="scanlines" id="scanlines"></div>
+  <!-- CRT vignette -->
+  <div class="crt-vignette" id="crtVignette"></div>
+
+  <!-- ===== SCREENS ===== -->
+
+  <!-- BOOT SCREEN -->
+  <div class="screen active" id="screen-boot">
+    <div class="boot-container">
+      <div class="boot-logo">
+        <div class="pixel-logo">
+          <span class="logo-r">R</span><span class="logo-e">E</span><span class="logo-t">T</span><span class="logo-r2">R</span><span class="logo-o">O</span>
+        </div>
+        <div class="logo-subtitle">GAME HUB</div>
+        <div class="logo-version">v1.0 &nbsp;·&nbsp; © 2025</div>
+      </div>
+      <div class="boot-progress">
+        <div class="boot-bar-track">
+          <div class="boot-bar-fill" id="bootBar"></div>
+        </div>
+        <div class="boot-status" id="bootStatus">LOADING SYSTEM...</div>
+      </div>
+      <div class="boot-hint blink">PRESS ANY KEY OR TAP TO START</div>
+    </div>
+  </div>
+
+  <!-- PLAYER SCREEN (login / register) -->
+  <div class="screen" id="screen-player">
+    <div class="player-container">
+      <div class="panel-title">PLAYER STATION</div>
+      <div class="tab-row">
+        <button class="tab-btn active" data-tab="login">LOAD SAVE</button>
+        <button class="tab-btn" data-tab="register">NEW PLAYER</button>
+      </div>
+
+      <!-- Login -->
+      <div class="tab-panel active" id="tab-login">
+        <label class="field-label">PLAYER ID</label>
+        <input class="retro-input" id="loginId" placeholder="Enter your ID..." maxlength="16" />
+        <label class="field-label">PIN (4 digits)</label>
+        <input class="retro-input" id="loginPin" type="password" placeholder="••••" maxlength="4" />
+        <button class="retro-btn" id="btnLogin">► LOAD GAME</button>
+        <div class="msg-box" id="loginMsg"></div>
+      </div>
+
+      <!-- Register -->
+      <div class="tab-panel" id="tab-register">
+        <label class="field-label">CHOOSE PLAYER ID</label>
+        <input class="retro-input" id="regId" placeholder="3-16 chars..." maxlength="16" />
+        <label class="field-label">CHOOSE AVATAR</label>
+        <div class="avatar-grid" id="avatarGrid"></div>
+        <label class="field-label">SET PIN (4 digits)</label>
+        <input class="retro-input" id="regPin" type="password" placeholder="••••" maxlength="4" />
+        <button class="retro-btn" id="btnRegister">► CREATE PLAYER</button>
+        <div class="msg-box" id="registerMsg"></div>
+      </div>
+
+      <!-- Guest -->
+      <button class="retro-btn secondary" id="btnGuest">▷ PLAY AS GUEST</button>
+    </div>
+  </div>
+
+  <!-- HOME / GAME SELECT -->
+  <div class="screen" id="screen-home">
+    <!-- Top HUD -->
+    <div class="hud-bar">
+      <div class="hud-player" id="hudPlayer">
+        <span class="hud-avatar" id="hudAvatar">🎮</span>
+        <span class="hud-name" id="hudName">GUEST</span>
+      </div>
+      <div class="hud-coins">
+        <span class="coin-icon">🪙</span>
+        <span id="hudCoins">0</span>
+      </div>
+      <div class="hud-music" id="hudMusic" title="Music playing" style="display:none">
+        <span class="music-bars">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </span>
+        <span class="music-label" id="musicLabel">HOME</span>
+      </div>
+      <div class="hud-buttons">
+        <button class="hud-btn" id="btnLeaderboard" title="Leaderboard">🏆</button>
+        <button class="hud-btn" id="btnSettings" title="Settings">⚙</button>
+        <button class="hud-btn" id="btnLogout" title="Logout">⏻</button>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="home-title">
+      <div class="title-main">RETRO</div>
+      <div class="title-sub">GAME HUB</div>
+      <div class="title-tagline">Notebook classics, digitally reborn</div>
+    </div>
+
+    <!-- Game Cards -->
+    <div class="game-grid">
+      <div class="game-card" data-game="dots" data-coins="15">
+        <div class="game-card-art">
+          <div class="dots-preview">
+            <div class="dp-dot"></div><div class="dp-line h"></div><div class="dp-dot"></div><div class="dp-line h"></div><div class="dp-dot"></div>
+            <div class="dp-line v"></div><div class="dp-box filled"></div><div class="dp-line v"></div><div class="dp-box"></div><div class="dp-line v"></div>
+            <div class="dp-dot"></div><div class="dp-line h"></div><div class="dp-dot"></div><div class="dp-line h"></div><div class="dp-dot"></div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">DOTS &amp; BOXES</div>
+          <div class="game-desc">Claim territory, outsmart your rival</div>
+          <div class="game-reward">🪙 +15 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <div class="game-card" data-game="ttt" data-coins="10">
+        <div class="game-card-art">
+          <div class="ttt-preview">
+            <span>X</span><span></span><span>O</span>
+            <span></span><span>X</span><span></span>
+            <span>O</span><span></span><span>X</span>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">TIC-TAC-TOE</div>
+          <div class="game-desc">Three in a row to claim glory</div>
+          <div class="game-reward">🪙 +10 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <div class="game-card" data-game="snl" data-coins="20">
+        <div class="game-card-art">
+          <div class="snl-preview">
+            <div class="snl-board-mini">
+              <div class="snl-cell s">🐍</div><div class="snl-cell"></div><div class="snl-cell"></div>
+              <div class="snl-cell"></div><div class="snl-cell l">🪜</div><div class="snl-cell"></div>
+              <div class="snl-cell"></div><div class="snl-cell"></div><div class="snl-cell s2">🐍</div>
+            </div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">SNAKES &amp; LADDERS</div>
+          <div class="game-desc">Luck, laughter, and lucky ladders</div>
+          <div class="game-reward">🪙 +20 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Battleship -->
+      <div class="game-card" data-game="bs" data-coins="25">
+        <div class="game-card-art">
+          <div class="bs-card-preview">
+            <div class="bs-prev-grid">
+              <div class="bsp s"></div><div class="bsp s"></div><div class="bsp h"></div><div class="bsp e"></div><div class="bsp e"></div>
+              <div class="bsp e"></div><div class="bsp e"></div><div class="bsp m"></div><div class="bsp e"></div><div class="bsp s"></div>
+              <div class="bsp s"></div><div class="bsp e"></div><div class="bsp e"></div><div class="bsp h"></div><div class="bsp s"></div>
+              <div class="bsp s"></div><div class="bsp m"></div><div class="bsp e"></div><div class="bsp e"></div><div class="bsp s"></div>
+              <div class="bsp e"></div><div class="bsp e"></div><div class="bsp e"></div><div class="bsp h"></div><div class="bsp e"></div>
+            </div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">BATTLESHIP</div>
+          <div class="game-desc">Place your fleet, hunt the enemy</div>
+          <div class="game-reward">&#x1FA99; +25 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Connect Four -->
+      <div class="game-card" data-game="c4" data-coins="12">
+        <div class="game-card-art">
+          <div class="c4-card-preview">
+            <div class="c4-prev-grid">
+              <div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div>
+              <div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div>
+              <div class="c4p e"></div><div class="c4p e"></div><div class="c4p r"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div>
+              <div class="c4p e"></div><div class="c4p e"></div><div class="c4p b"></div><div class="c4p r"></div><div class="c4p e"></div><div class="c4p e"></div><div class="c4p e"></div>
+              <div class="c4p e"></div><div class="c4p b"></div><div class="c4p r"></div><div class="c4p b"></div><div class="c4p r"></div><div class="c4p e"></div><div class="c4p e"></div>
+              <div class="c4p b"></div><div class="c4p r"></div><div class="c4p b"></div><div class="c4p r"></div><div class="c4p b"></div><div class="c4p r"></div><div class="c4p b"></div>
+            </div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">CONNECT FOUR</div>
+          <div class="game-desc">Drop discs, get 4 in a row</div>
+          <div class="game-reward">&#x1FA99; +12 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Hangman -->
+      <div class="game-card" data-game="hangman" data-coins="14">
+        <div class="game-card-art">
+          <div class="soon-art-custom">
+            <div class="cs-hangman">
+              <div class="cs-gallow">
+                <div class="cs-pole v"></div>
+                <div class="cs-pole h"></div>
+                <div class="cs-pole rope"></div>
+                <div class="cs-stick head"></div>
+                <div class="cs-stick body"></div>
+                <div class="cs-stick arm-l"></div>
+                <div class="cs-stick arm-r"></div>
+              </div>
+              <div class="cs-word">_ _ _ _ _</div>
+            </div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">HANGMAN</div>
+          <div class="game-desc">Guess the word before it's too late</div>
+          <div class="game-reward">🪙 +14 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Memory Match -->
+      <div class="game-card" data-game="memory" data-coins="16">
+        <div class="game-card-art">
+          <div class="soon-art-custom">
+            <div class="cs-memory">
+              <div class="cs-card flipped">🎮</div>
+              <div class="cs-card">?</div>
+              <div class="cs-card flipped">🎮</div>
+              <div class="cs-card">?</div>
+              <div class="cs-card">?</div>
+              <div class="cs-card flipped">👾</div>
+              <div class="cs-card">?</div>
+              <div class="cs-card flipped">👾</div>
+              <div class="cs-card">?</div>
+            </div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">MEMORY MATCH</div>
+          <div class="game-desc">Flip cards, find the pairs</div>
+          <div class="game-reward">🪙 +16 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Tetris -->
+      <div class="game-card" data-game="tetris" data-coins="20">
+        <div class="game-card-art">
+          <div class="tetris-preview">
+            <div class="tetris-prev-grid">
+              <div class="tp e"></div><div class="tp e"></div><div class="tp i"></div><div class="tp e"></div>
+              <div class="tp e"></div><div class="tp t"></div><div class="tp t"></div><div class="tp t"></div>
+              <div class="tp e"></div><div class="tp e"></div><div class="tp e"></div><div class="tp e"></div>
+            </div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">TETRIS</div>
+          <div class="game-desc">Stack blocks, clear lines</div>
+          <div class="game-reward">🪙 +20 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Pong -->
+      <div class="game-card" data-game="pong" data-coins="12">
+        <div class="game-card-art">
+          <div class="pong-preview">
+            <div class="pong-prev-paddle"></div>
+            <div class="pong-prev-ball"></div>
+            <div class="pong-prev-paddle"></div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">PONG</div>
+          <div class="game-desc">Classic paddle battle</div>
+          <div class="game-reward">🪙 +12 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LEADERBOARD SCREEN -->
+  <div class="screen" id="screen-leaderboard">
+    <div class="panel-header">
+      <button class="back-btn" data-back="home">◄ BACK</button>
+      <div class="panel-title">🏆 HALL OF FAME</div>
+    </div>
+    <div class="lb-container">
+      <div class="lb-tabs">
+        <button class="lb-tab active" data-lb="all">ALL TIME</button>
+        <button class="lb-tab" data-lb="dots">DOTS</button>
+        <button class="lb-tab" data-lb="ttt">TIC-TAC-TOE</button>
+        <button class="lb-tab" data-lb="snl">SNAKES</button>
+        <button class="lb-tab" data-lb="hangman">HANGMAN</button>
+        <button class="lb-tab" data-lb="memory">MEMORY</button>
+        <button class="lb-tab" data-lb="tetris">TETRIS</button>
+        <button class="lb-tab" data-lb="pong">PONG</button>
+      </div>
+      <div class="lb-list" id="lbList"></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS SCREEN -->
+  <div class="screen" id="screen-settings">
+    <div class="panel-header">
+      <button class="back-btn" data-back="home">◄ BACK</button>
+      <div class="panel-title">⚙ SETTINGS</div>
+    </div>
+    <div class="settings-container">
+      <div class="settings-section">
+        <div class="settings-label">DISPLAY THEME</div>
+        <div class="theme-grid">
+          <button class="theme-opt" data-theme="default">
+            <div class="theme-preview default-prev"></div>
+            <span>DEFAULT</span>
+          </button>
+          <button class="theme-opt" data-theme="notebook">
+            <div class="theme-preview notebook-prev"></div>
+            <span>NOTEBOOK</span>
+          </button>
+          <button class="theme-opt" data-theme="gameboy">
+            <div class="theme-preview gameboy-prev"></div>
+            <span>GAME BOY</span>
+          </button>
+          <button class="theme-opt" data-theme="neon">
+            <div class="theme-preview neon-prev"></div>
+            <span>NEON</span>
+          </button>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-label">CRT EFFECTS</div>
+        <div class="toggle-row">
+          <span>Scanlines</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggleScanlines" checked />
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span>CRT Vignette</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggleVignette" checked />
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span>Pixel Font</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="togglePixelFont" checked />
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-label">SOUND</div>
+        <div class="toggle-row">
+          <span>Sound Effects</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggleSound" checked />
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span>Music</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggleMusic" />
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-label">DANGER ZONE</div>
+        <button class="retro-btn danger" id="btnDeleteAccount">DELETE MY ACCOUNT</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME WRAPPER SCREEN -->
+  <div class="screen" id="screen-game">
+    <div class="game-hud">
+      <button class="back-btn" id="gameBackBtn">◄ EXIT</button>
+      <div class="game-hud-title" id="gameTitle">GAME</div>
+      <div class="hud-music game-music-indicator" id="hudMusicGame" style="display:none">
+        <span class="music-bars">
+          <span class="bar"></span><span class="bar"></span>
+          <span class="bar"></span><span class="bar"></span>
+        </span>
+      </div>
+      <div class="game-hud-scores" id="gameHudScores"></div>
+    </div>
+    <div class="game-area" id="gameArea">
+      <!-- Games load here dynamically -->
+    </div>
+    <div class="game-controls">
+      <button class="retro-btn small" id="btnRestartGame">↺ RESTART</button>
+      <button class="retro-btn small secondary" id="btnGameMode">VS AI</button>
+      <button class="retro-btn small secondary" id="btnOnlineGame">🌐 ONLINE</button>
+    </div>
+  </div>
+
+  <!-- ONLINE MATCH MODAL -->
+  <div class="modal-overlay" id="onlineModal">
+    <div class="modal-box">
+      <div class="modal-title">ONLINE MATCH</div>
+      <div class="modal-subtitle">Host or join a room to play with a friend.</div>
+      <div class="modal-actions">
+        <button class="retro-btn" id="btnHostMatch">HOST GAME</button>
+        <button class="retro-btn secondary" id="btnJoinMatch">JOIN GAME</button>
+      </div>
+      <div class="modal-panel" id="onlineJoinPanel" style="display:none; margin-top:16px;">
+        <label class="field-label">ROOM CODE</label>
+        <input class="retro-input" id="joinRoomCode" maxlength="6" placeholder="A1B2C3" />
+        <button class="retro-btn" id="btnSubmitJoin">JOIN ROOM</button>
+      </div>
+      <div class="modal-subtitle" id="onlineStatus" style="margin-top:16px; font-size:0.9rem; color:var(--text-secondary);"></div>
+      <div class="modal-subtitle" id="onlineHint" style="margin-top:8px; font-size:0.85rem; color:var(--text-secondary);"></div>
+      <div class="modal-actions" style="margin-top:16px; justify-content:flex-end;">
+        <button class="retro-btn secondary" id="btnCancelOnline">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIN MODAL -->
+  <div class="modal-overlay" id="winModal">
+    <div class="modal-box">
+      <div class="modal-stars">★ ★ ★</div>
+      <div class="modal-title" id="modalTitle">WINNER!</div>
+      <div class="modal-subtitle" id="modalSub">Player 1 wins the match!</div>
+      <div class="modal-coins" id="modalCoins">🪙 +15 coins awarded!</div>
+      <div class="modal-actions">
+        <button class="retro-btn" id="modalPlayAgain">▶ PLAY AGAIN</button>
+        <button class="retro-btn secondary" id="modalHome">⌂ HOME</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRM MODAL -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-box">
+      <div class="modal-title" id="confirmTitle">CONFIRM</div>
+      <div class="modal-subtitle" id="confirmMsg">Are you sure?</div>
+      <div class="modal-actions">
+        <button class="retro-btn danger" id="confirmYes">YES</button>
+        <button class="retro-btn secondary" id="confirmNo">NO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/sound.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/network.js"></script>
+  <script src="games/tictactoe.js"></script>
+  <script src="games/dots.js"></script>
+  <script src="games/snl.js"></script>
+  <script src="games/battleship.js"></script>
+  <script src="games/connectfour.js"></script>
+  <script src="games/hangman.js"></script>
+  <script src="games/memorymatch.js"></script>
+  <script src="games/tetris.js"></script>
+  <script src="games/pong.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>
