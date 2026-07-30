@@ -785,6 +785,25 @@ body.no-pixel-font {
 .score-chip.p1 { border-color: var(--p1); color: var(--p1); }
 .score-chip.p2 { border-color: var(--p2); color: var(--p2); }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.page-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .game-area {
   padding: 20px;
   display: flex;

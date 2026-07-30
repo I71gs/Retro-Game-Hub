@@ -19,7 +19,7 @@ export function HUDBar() {
 
   return (
     <header
-      className="flex items-center justify-between px-4 py-3 border-b"
+      className="w-full flex items-center justify-between px-6 py-3 border-b"
       style={{ borderColor: 'var(--border)', background: 'var(--bg-secondary)' }}
     >
       {/* Player Info */}

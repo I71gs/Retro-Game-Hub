@@ -21,7 +21,7 @@ export function DashboardPage() {
   if (!currentPlayer) return null;
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
+    <div className="min-h-screen flex flex-col w-full items-center" style={{ background: 'var(--bg-primary)' }}>
       <HUDBar />
 
       <main className="flex-1 py-8 page-container">
