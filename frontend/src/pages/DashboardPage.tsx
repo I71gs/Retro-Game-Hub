@@ -24,7 +24,7 @@ export function DashboardPage() {
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
       <HUDBar />
 
-      <main className="flex-1 px-4 py-8 max-w-7xl mx-auto w-full">
+      <main className="flex-1 py-8 page-container">
         {/* Title */}
         <motion.div
           className="text-center mb-10"
@@ -82,9 +82,9 @@ export function DashboardPage() {
             ► SELECT GAME
           </h2>
           <div
-            className="grid gap-4"
+            className="grid gap-5"
             style={{
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
             }}
           >
             {GAME_REGISTRY.map((game, i) => (

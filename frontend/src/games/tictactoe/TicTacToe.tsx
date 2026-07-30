@@ -1,27 +1,43 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import type { GameConfig } from '../../types';
+import { minimax } from './ai/minimax';
 import { AudioManager } from '../../services/AudioManager';
-import { checkWinner, getBestMove } from './ai/minimax';
+
+type Mark = 'X' | 'O' | null;
+
+function checkWinner(b: Mark[]): { winner: string; line: number[] } | null {
+  const lines = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6],
+  ];
+  for (const [a,b2,c] of lines) {
+    if (b[a] && b[a] === b[b2] && b[a] === b[c])
+      return { winner: b[a]!, line: [a,b2,c] };
+  }
+  if (b.every(Boolean)) return { winner: 'draw', line: [] };
+  return null;
+}
 
 export function TicTacToe({ config }: { config: GameConfig }) {
-  const [board, setBoard] = useState<(string|null)[]>(Array(9).fill(null));
-  const [current, setCurrent] = useState<'X'|'O'>('X');
-  const [scores, setScores] = useState({ X: 0, O: 0 });
-  const [gameOver, setGameOver] = useState(false);
-  const [winLine, setWinLine] = useState<number[]>([]);
-  const [popped, setPopped] = useState<number>(-1);
-  const [ended, setEnded] = useState(false);
-
   const { p1Name, p2Name, vsAI, onWin, onDraw } = config;
+  const [board, setBoard] = useState<Mark[]>(Array(9).fill(null));
+  const [current, setCurrent] = useState<'X' | 'O'>('X');
+  const [gameOver, setGameOver] = useState(false);
+  const [winner, setWinner] = useState<string | null>(null);
+  const [winLine, setWinLine] = useState<number[]>([]);
+  const [scores, setScores] = useState({ X: 0, O: 0 });
+  const [popped, setPopped] = useState(-1);
+  const ended = useRef(false);
 
-  const doEnd = useCallback((result: { winner: string; line?: number[] }) => {
-    if (ended) return;
-    setEnded(true);
+  const doEnd = useCallback((result: { winner: string; line: number[] }) => {
+    if (ended.current) return;
+    ended.current = true;
+    setWinner(result.winner);
+    setWinLine(result.line);
     setGameOver(true);
-    if (result.line) setWinLine(result.line);
-
     if (result.winner === 'draw') {
-      setTimeout(() => onDraw(), 600);
+      setTimeout(() => onDraw(), 700);
     } else {
       const winnerName = result.winner === 'X' ? p1Name : p2Name;
       setScores(prev => ({ ...prev, [result.winner]: prev[result.winner as 'X'|'O'] + 1 }));
@@ -29,79 +45,97 @@ export function TicTacToe({ config }: { config: GameConfig }) {
     }
   }, [ended, p1Name, p2Name, onWin, onDraw]);
 
-  const makeMove = useCallback((idx: number, b: (string|null)[], player: 'X'|'O') => {
-    const nb = [...b];
-    nb[idx] = player;
+  function handleClick(i: number) {
+    if (gameOver || board[i] || (vsAI && current === 'O') || ended.current) return;
+    const nb = [...board];
+    nb[i] = current;
     setBoard(nb);
-    setPopped(idx);
+    setPopped(i);
     AudioManager.play('move');
     setTimeout(() => setPopped(-1), 300);
 
     const result = checkWinner(nb);
     if (result) {
       doEnd(result);
-      return nb;
+      return;
     }
-    const next: 'X'|'O' = player === 'X' ? 'O' : 'X';
+    const next: 'X' | 'O' = current === 'X' ? 'O' : 'X';
     setCurrent(next);
 
     if (vsAI && next === 'O') {
       setTimeout(() => {
-        const aiIdx = getBestMove(nb);
-        if (aiIdx !== -1) {
-          const nb2 = [...nb];
-          nb2[aiIdx] = 'O';
-          setBoard(nb2);
-          setPopped(aiIdx);
-          AudioManager.play('move');
-          setTimeout(() => setPopped(-1), 300);
-          const r2 = checkWinner(nb2);
-          if (r2) { doEnd(r2); return; }
-          setCurrent('X');
-        }
+        const move = minimax(nb, 'O');
+        const nb2 = [...nb];
+        nb2[move] = 'O';
+        setBoard(nb2);
+        setPopped(move);
+        AudioManager.play('move');
+        setTimeout(() => setPopped(-1), 300);
+        const r2 = checkWinner(nb2);
+        if (r2) { doEnd(r2); return; }
+        setCurrent('X');
       }, 420);
     }
-    return nb;
-  }, [vsAI, doEnd]);
-
-  function handleClick(i: number) {
-    if (gameOver || board[i]) return;
-    if (vsAI && current === 'O') return;
-    makeMove(i, board, current);
   }
 
-  const statusText = gameOver
-    ? (winLine.length ? `${current === 'X' ? p2Name : p1Name} WINS!` : "DRAW!")
-    : `${current === 'X' ? p1Name : p2Name}'s turn (${current})`;
+  const symbols: Record<string, string> = { X: '✕', O: '○' };
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      {/* Scores */}
-      <div className="flex gap-8 font-pixel" style={{ fontSize: '0.6rem' }}>
-        <span style={{ color: 'var(--p1)' }}>{p1Name}: {scores.X}</span>
-        <span style={{ color: 'var(--p2)' }}>{p2Name}: {scores.O}</span>
+    <div className="ttt-wrapper">
+      {/* Score row */}
+      <div className="game-scorebar">
+        <div className="game-score-chip p1">
+          {p1Name} (X) — {scores.X}
+        </div>
+        {!vsAI && (
+          <div className="game-score-chip p2">
+            {p2Name} (O) — {scores.O}
+          </div>
+        )}
+        {vsAI && (
+          <div className="game-score-chip p2">
+            🤖 CPU (O) — {scores.O}
+          </div>
+        )}
       </div>
+
+      {/* Turn indicator */}
+      {!gameOver && (
+        <div className="ttt-status">
+          {current === 'X'
+            ? <span style={{ color: 'var(--p1)' }}>{p1Name}'s turn (X)</span>
+            : vsAI
+              ? <span style={{ color: 'var(--p2)' }}>🤖 CPU thinking...</span>
+              : <span style={{ color: 'var(--p2)' }}>{p2Name}'s turn (O)</span>}
+        </div>
+      )}
 
       {/* Board */}
       <div className="ttt-board">
         {board.map((cell, i) => (
-          <div
+          <button
             key={i}
-            className={`ttt-cell${cell ? ` taken ${cell.toLowerCase()}` : ''}${winLine.includes(i) ? ' win-cell' : ''}${popped === i ? ' pop' : ''}`}
+            className={[
+              'ttt-cell',
+              cell === 'X' ? 'x' : '',
+              cell === 'O' ? 'o' : '',
+              cell ? 'taken' : '',
+              winLine.includes(i) ? 'win-cell' : '',
+              popped === i ? 'pop' : '',
+            ].filter(Boolean).join(' ')}
             onClick={() => handleClick(i)}
           >
-            {cell || ''}
-          </div>
+            {cell ? symbols[cell] : ''}
+          </button>
         ))}
       </div>
 
-      {/* Status */}
-      <div
-        className="ttt-status"
-        style={{ color: current === 'X' ? 'var(--p1)' : 'var(--p2)' }}
-      >
-        {statusText}
-      </div>
+      {/* Result */}
+      {gameOver && (
+        <div className="ttt-status" style={{ color: winner === 'draw' ? 'var(--accent3)' : 'var(--accent4)', fontSize: '0.7rem' }}>
+          {winner === 'draw' ? "🤝 IT'S A DRAW!" : `🏆 ${winner === 'X' ? p1Name : (vsAI ? 'CPU' : p2Name)} WINS!`}
+        </div>
+      )}
     </div>
   );
 }
