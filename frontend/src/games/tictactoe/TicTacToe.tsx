@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import type { GameConfig } from '../../types';
-import { minimax } from './ai/minimax';
+import { getBestMove } from './ai/minimax';
 import { AudioManager } from '../../services/AudioManager';
 
 type Mark = 'X' | 'O' | null;
@@ -64,7 +64,7 @@ export function TicTacToe({ config }: { config: GameConfig }) {
 
     if (vsAI && next === 'O') {
       setTimeout(() => {
-        const move = minimax(nb, 'O');
+        const move = getBestMove(nb);
         const nb2 = [...nb];
         nb2[move] = 'O';
         setBoard(nb2);

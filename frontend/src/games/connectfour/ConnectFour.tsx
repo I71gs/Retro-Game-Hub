@@ -30,43 +30,6 @@ export function ConnectFour({ config }: { config: GameConfig }) {
     }
   }, [ended, p1Name, p2Name, vsAI, onWin, onDraw]);
 
-  function handleDrop(col: number) {
-    if (gameOver || current !== 1 || ended.current) return;
-    const r = getOpenRow(board, col);
-    if (r < 0) return;
-
-    const nb = board.map(row => [...row]);
-    nb[r][col] = 1;
-    setBoard(nb);
-    setDropping(col);
-    AudioManager.play('move');
-    setTimeout(() => setDropping(-1), 350);
-
-    const result = checkWinner(nb);
-    if (result) { doEnd(result); return nb; }
-
-    setCurrent(2);
-
-    if (vsAI) {
-      setTimeout(() => {
-        const aiCol = getBestMove(nb);
-        const ar = getOpenRow(nb, aiCol);
-        if (ar < 0) return;
-        const nb2 = nb.map(row => [...row]);
-        nb2[ar][aiCol] = 2;
-        setBoard(nb2);
-        setDropping(aiCol);
-        AudioManager.play('move');
-        setTimeout(() => setDropping(-1), 350);
-        const r2 = checkWinner(nb2);
-        if (r2) { doEnd(r2); return; }
-        setCurrent(1);
-      }, 500);
-    } else {
-      setCurrent(2);
-    }
-  }
-
   function handleHumanDrop(col: number) {
     if (gameOver || ended.current) return;
     if (vsAI && current !== 1) return;
