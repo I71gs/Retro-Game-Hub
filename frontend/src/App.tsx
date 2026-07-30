@@ -7,6 +7,8 @@ import { DashboardPage } from './pages/DashboardPage';
 import { GamePage } from './pages/GamePage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { SettingsPage } from './pages/SettingsPage';
+import { ProfilePage } from './pages/ProfilePage';
+import { StorePage } from './pages/StorePage';
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
           <Route path="/game/:id"   element={<GamePage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/settings"   element={<SettingsPage />} />
+          <Route path="/profile"    element={<ProfilePage />} />
+          <Route path="/store"      element={<StorePage />} />
           <Route path="*"           element={<Navigate to="/" replace />} />
         </Routes>
       </ThemeProvider>

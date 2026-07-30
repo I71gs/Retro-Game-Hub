@@ -23,7 +23,11 @@ export function HUDBar() {
       style={{ borderColor: 'var(--border)', background: 'var(--bg-secondary)' }}
     >
       {/* Player Info */}
-      <div className="flex items-center gap-3">
+      <div
+        className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+        onClick={() => { AudioManager.play('click'); navigate('/profile'); }}
+        title="View Profile Analytics"
+      >
         <span className="text-2xl">{currentPlayer.avatar}</span>
         <div>
           <p className="font-pixel text-xs" style={{ color: 'var(--accent1)', fontSize: '0.6rem' }}>
@@ -52,31 +56,42 @@ export function HUDBar() {
 
       {/* Right Side */}
       <div className="flex items-center gap-3">
-        {/* Coins */}
-        <div className="flex items-center gap-1">
+        {/* Store */}
+        <button
+          className="flex items-center gap-1 hover:scale-110 transition-transform cursor-pointer"
+          title="Retro Store"
+          onClick={() => { AudioManager.play('click'); navigate('/store'); }}
+        >
           <span>🪙</span>
           <span className="font-pixel" style={{ color: 'var(--accent3)', fontSize: '0.7rem' }}>
             {currentPlayer.coins}
           </span>
-        </div>
+        </button>
+
+        {/* Profile */}
+        <button
+          className="text-xl hover:scale-110 transition-transform cursor-pointer"
+          title="Profile Analytics"
+          onClick={() => { AudioManager.play('click'); navigate('/profile'); }}
+        >👤</button>
 
         {/* Leaderboard */}
         <button
-          className="text-xl hover:scale-110 transition-transform"
+          className="text-xl hover:scale-110 transition-transform cursor-pointer"
           title="Leaderboard"
           onClick={() => { AudioManager.play('click'); navigate('/leaderboard'); }}
         >🏆</button>
 
         {/* Settings */}
         <button
-          className="text-xl hover:scale-110 transition-transform"
+          className="text-xl hover:scale-110 transition-transform cursor-pointer"
           title="Settings"
           onClick={() => { AudioManager.play('click'); navigate('/settings'); }}
         >⚙️</button>
 
         {/* Logout */}
         <button
-          className="text-xl hover:scale-110 transition-transform"
+          className="text-xl hover:scale-110 transition-transform cursor-pointer"
           title="Logout"
           onClick={handleLogout}
         >⏻</button>

@@ -1,0 +1,102 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String            @id @default(uuid())
+  username     String            @unique
+  email        String            @unique
+  passwordHash String
+  level        Int               @default(1)
+  xp           Int               @default(0)
+  coins        Int               @default(100)
+  avatar       String            @default("🎮")
+  theme        String            @default("default")
+  createdAt    DateTime          @default(now())
+
+  statistics       Statistics[]
+  achievements     UserAchievement[]
+  matchesAsPlayer1 MatchHistory[]    @relation("Player1Matches")
+  matchesAsPlayer2 MatchHistory[]    @relation("Player2Matches")
+  inventory        UserInventory[]
+}
+
+model Statistics {
+  id            String @id @default(uuid())
+  userId        String
+  game          String
+  wins          Int    @default(0)
+  losses        Int    @default(0)
+  draws         Int    @default(0)
+  highestScore  Int    @default(0)
+  longestStreak Int    @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, game])
+}
+
+model Achievement {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  title       String
+  description String
+  rewardXp    Int
+  rewardCoins Int
+  icon        String
+
+  unlockedBy UserAchievement[]
+}
+
+model UserAchievement {
+  id            String   @id @default(uuid())
+  userId        String
+  achievementId String
+  unlockedAt    DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+}
+
+model MatchHistory {
+  id         String   @id @default(uuid())
+  player1Id  String
+  player2Id  String?
+  game       String
+  winnerId   String?
+  duration   Int      @default(0)
+  moves      Json?
+  createdAt  DateTime @default(now())
+
+  player1 User  @relation("Player1Matches", fields: [player1Id], references: [id], onDelete: Cascade)
+  player2 User? @relation("Player2Matches", fields: [player2Id], references: [id], onDelete: SetNull)
+}
+
+model StoreItem {
+  id       String @id @default(uuid())
+  name     String
+  price    Int
+  type     String // avatar | theme | sfx
+  rarity   String // common | rare | epic | legendary
+  metadata Json?
+
+  owners UserInventory[]
+}
+
+model UserInventory {
+  id          String   @id @default(uuid())
+  userId      String
+  storeItemId String
+  purchasedAt DateTime @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  storeItem StoreItem @relation(fields: [storeItemId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, storeItemId])
+}
