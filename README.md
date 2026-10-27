@@ -212,36 +212,12 @@ npm install
 npm run start:dev
 # NestJS REST API runs at http://localhost:3001
 ```
-
----
-
-## 🎓 Project-Based Learning (PBL) Academic Overview
-
-This project was conceived, designed, and implemented as part of the **Project-Based Learning (PBL)** curriculum for **Semester 2** at the **School of CSIT**.
-
-### 👤 Author & Developer
-| Roll No. | PRN | Name | Role / Contributions |
-|:---:|:---:|:---|:---|
-| 01 | 2501106155 | **Shubham Salunke** | System Architecture, Game Engine Core, Full-Stack Development |
-
 ### 📚 Academic Concepts & Cross-Discipline Integration
 - **Web Technologies**: Vanilla HTML5 Canvas, CSS Grid/Flexbox, ES6+ JavaScript, Responsive Web Design, Progressive Web Apps.
 - **Artificial Intelligence**: Minimax game trees with Alpha-Beta pruning, heuristic evaluation functions for grid-based strategy games.
 - **Data Structures & Algorithms**: Matrix transformations, circular arrays, collision detection algorithms, graph cascade algorithms (Minesweeper flood fill), queue-based movement (Snake).
 - **Computer Networks**: WebSocket protocol (`ws`), full-duplex client-server communications, event-driven state replication.
 - **Software Engineering**: Modular architecture, defensive programming, automated build verification, comprehensive documentation.
-
----
-
-## 🏆 Project Achievements & Milestones
-
-- [x] **Complete 14-Game Suite**: Successfully designed, developed, and calibrated 14 distinct classic arcade, puzzle, and board games.
-- [x] **Zero External Asset Audio Engine**: Built a procedural synthesizer using Web Audio API with zero audio file downloads.
-- [x] **Offline Independence**: Integrated Service Worker and PWA manifest allowing offline playability anytime, anywhere.
-- [x] **Flawless State & Persistence**: Robust LocalStorage state engine with user registration, secure PIN hashing, coin ledger, and leaderboards.
-- [x] **Dual Implementation Stack**: Provided both a lightweight, zero-dependency vanilla JS edition and a production-grade modern React 19 + TypeScript edition.
-- [x] **Real-Time Multiplayer**: Established live WebSocket room pairing for head-to-head competitive gaming.
-- [x] **Verified & Linted**: Passed automated code syntax verification across all 14 vanilla games and TypeScript/oxlint validation.
 
 ---
 
