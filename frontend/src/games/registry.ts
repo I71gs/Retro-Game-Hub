@@ -9,6 +9,11 @@ import { Hangman } from './hangman/Hangman';
 import { MemoryMatch } from './memory/MemoryMatch';
 import { Tetris } from './tetris/Tetris';
 import { Pong } from './pong/Pong';
+import { Snake } from './snake/Snake';
+import { Game2048 } from './game2048/Game2048';
+import { Breakout } from './breakout/Breakout';
+import { Minesweeper } from './minesweeper/Minesweeper';
+import { SimonSays } from './simonsays/SimonSays';
 
 export const GAME_REGISTRY: GameMeta[] = [
   {
@@ -92,6 +97,51 @@ export const GAME_REGISTRY: GameMeta[] = [
     supportsOnline: false,
     previewType: 'pong',
   },
+  {
+    id: 'snake',
+    name: 'SNAKE',
+    description: 'Slither, devour apples, grow without crashing',
+    coinsPerWin: 15,
+    supportsAI: false,
+    supportsOnline: false,
+    previewType: 'snake',
+  },
+  {
+    id: 'game2048',
+    name: '2048',
+    description: 'Slide and merge numbers to reach 2048',
+    coinsPerWin: 25,
+    supportsAI: false,
+    supportsOnline: false,
+    previewType: 'game2048',
+  },
+  {
+    id: 'breakout',
+    name: 'BREAKOUT',
+    description: 'Smash through brick walls with precision rebounds',
+    coinsPerWin: 20,
+    supportsAI: false,
+    supportsOnline: false,
+    previewType: 'breakout',
+  },
+  {
+    id: 'minesweeper',
+    name: 'MINESWEEPER',
+    description: 'Uncover safe terrain, flag bombs, test deduction',
+    coinsPerWin: 18,
+    supportsAI: false,
+    supportsOnline: false,
+    previewType: 'minesweeper',
+  },
+  {
+    id: 'simon',
+    name: 'SIMON SAYS',
+    description: 'Remember and repeat the flashing tone sequence',
+    coinsPerWin: 20,
+    supportsAI: false,
+    supportsOnline: false,
+    previewType: 'simon',
+  },
 ];
 
 export const GAME_COMPONENTS: Record<string, ComponentType<{ config: GameConfig }>> = {
@@ -104,6 +154,11 @@ export const GAME_COMPONENTS: Record<string, ComponentType<{ config: GameConfig 
   memory: MemoryMatch,
   tetris: Tetris,
   pong: Pong,
+  snake: Snake,
+  game2048: Game2048,
+  breakout: Breakout,
+  minesweeper: Minesweeper,
+  simon: SimonSays,
 };
 
 export const GAME_TRACKS: Record<string, string> = {
@@ -116,4 +171,9 @@ export const GAME_TRACKS: Record<string, string> = {
   memory: 'memory',
   tetris: 'tetris',
   pong: 'pong',
+  snake: 'snl',
+  game2048: 'dots',
+  breakout: 'pong',
+  minesweeper: 'ttt',
+  simon: 'memory',
 };

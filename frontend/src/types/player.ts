@@ -9,6 +9,11 @@ export interface WinRecord {
   memory: number;
   tetris: number;
   pong: number;
+  snake: number;
+  game2048: number;
+  breakout: number;
+  minesweeper: number;
+  simon: number;
 }
 
 export interface Player {
@@ -46,4 +51,5 @@ export const DEFAULT_SETTINGS: Settings = {
 export const EMPTY_WIN_RECORD = (): WinRecord => ({
   total: 0, dots: 0, ttt: 0, snl: 0, bs: 0,
   c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0,
+  snake: 0, game2048: 0, breakout: 0, minesweeper: 0, simon: 0,
 });

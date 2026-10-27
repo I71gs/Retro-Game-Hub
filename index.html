@@ -295,6 +295,103 @@
         <button class="play-btn">PLAY</button>
       </div>
 
+      <!-- Snake -->
+      <div class="game-card" data-game="snake" data-coins="15">
+        <div class="game-card-art">
+          <div class="snake-preview">
+            <div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div>
+            <div class="sp-cell"></div><div class="sp-cell body"></div><div class="sp-cell body"></div><div class="sp-cell head"></div><div class="sp-cell"></div><div class="sp-cell food"></div><div class="sp-cell"></div>
+            <div class="sp-cell"></div><div class="sp-cell body"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div>
+            <div class="sp-cell"></div><div class="sp-cell body"></div><div class="sp-cell body"></div><div class="sp-cell body"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div>
+            <div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div><div class="sp-cell"></div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">SNAKE</div>
+          <div class="game-desc">Slither, devour apples, grow without crashing</div>
+          <div class="game-reward">🪙 +15 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- 2048 -->
+      <div class="game-card" data-game="game2048" data-coins="25">
+        <div class="game-card-art">
+          <div class="g2048-preview">
+            <div class="g2048-prev-tile t2">2</div><div class="g2048-prev-tile t4">4</div><div class="g2048-prev-tile t8">8</div>
+            <div class="g2048-prev-tile t16">16</div><div class="g2048-prev-tile t64">64</div><div class="g2048-prev-tile t2">2</div>
+            <div class="g2048-prev-tile t8">8</div><div class="g2048-prev-tile t2048">2048</div><div class="g2048-prev-tile t4">4</div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">2048</div>
+          <div class="game-desc">Slide and merge numbers to reach the legendary 2048</div>
+          <div class="game-reward">🪙 +25 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Breakout -->
+      <div class="game-card" data-game="breakout" data-coins="20">
+        <div class="game-card-art">
+          <div class="breakout-preview">
+            <div class="bo-brick-row">
+              <div class="bo-brick r1"></div><div class="bo-brick r1"></div><div class="bo-brick r1"></div><div class="bo-brick r1"></div><div class="bo-brick r1"></div><div class="bo-brick r1"></div>
+            </div>
+            <div class="bo-brick-row">
+              <div class="bo-brick r2"></div><div class="bo-brick r2"></div><div class="bo-brick r2"></div><div class="bo-brick r2"></div><div class="bo-brick r2"></div><div class="bo-brick r2"></div>
+            </div>
+            <div class="bo-brick-row">
+              <div class="bo-brick r3"></div><div class="bo-brick r3"></div><div class="bo-brick r3"></div><div class="bo-brick r3"></div><div class="bo-brick r3"></div><div class="bo-brick r3"></div>
+            </div>
+            <div class="bo-ball"></div>
+            <div class="bo-paddle"></div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">BREAKOUT</div>
+          <div class="game-desc">Smash through vibrant brick walls with precision rebounds</div>
+          <div class="game-reward">🪙 +20 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Minesweeper -->
+      <div class="game-card" data-game="minesweeper" data-coins="18">
+        <div class="game-card-art">
+          <div class="ms-card-preview">
+            <div class="ms-pcell open one">1</div><div class="ms-pcell open two">2</div><div class="ms-pcell">🚩</div>
+            <div class="ms-pcell open"></div><div class="ms-pcell open one">1</div><div class="ms-pcell"></div>
+            <div class="ms-pcell"></div><div class="ms-pcell open">💣</div><div class="ms-pcell open one">1</div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">MINESWEEPER</div>
+          <div class="game-desc">Uncover safe terrain, flag bombs, test your deduction</div>
+          <div class="game-reward">🪙 +18 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
+      <!-- Simon Says -->
+      <div class="game-card" data-game="simon" data-coins="20">
+        <div class="game-card-art">
+          <div class="simon-preview">
+            <div class="spad g"></div>
+            <div class="spad r"></div>
+            <div class="spad y"></div>
+            <div class="spad b"></div>
+            <div class="simon-pcenter"></div>
+          </div>
+        </div>
+        <div class="game-card-info">
+          <div class="game-name">SIMON SAYS</div>
+          <div class="game-desc">Remember and repeat the flashing tone sequence</div>
+          <div class="game-reward">🪙 +20 per win</div>
+        </div>
+        <button class="play-btn">PLAY</button>
+      </div>
+
     </div>
   </div>
 
@@ -314,6 +411,11 @@
         <button class="lb-tab" data-lb="memory">MEMORY</button>
         <button class="lb-tab" data-lb="tetris">TETRIS</button>
         <button class="lb-tab" data-lb="pong">PONG</button>
+        <button class="lb-tab" data-lb="snake">SNAKE</button>
+        <button class="lb-tab" data-lb="game2048">2048</button>
+        <button class="lb-tab" data-lb="breakout">BREAKOUT</button>
+        <button class="lb-tab" data-lb="minesweeper">MINES</button>
+        <button class="lb-tab" data-lb="simon">SIMON</button>
       </div>
       <div class="lb-list" id="lbList"></div>
     </div>
@@ -480,6 +582,11 @@
   <script src="games/memorymatch.js"></script>
   <script src="games/tetris.js"></script>
   <script src="games/pong.js"></script>
+  <script src="games/snake.js"></script>
+  <script src="games/game2048.js"></script>
+  <script src="games/breakout.js"></script>
+  <script src="games/minesweeper.js"></script>
+  <script src="games/simonsays.js"></script>
   <script src="js/main.js"></script>
   <script src="js/pwa.js"></script>
 </body>

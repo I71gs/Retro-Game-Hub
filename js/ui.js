@@ -198,6 +198,7 @@ const UI = (() => {
     const labelMap = {
       home: 'HOME', login: 'MENU', ttt: 'X vs O', dots: 'DOTS', snl: 'ROLL!',
       hangman: 'HANGMAN', memory: 'MEMORY', tetris: 'TETRIS', pong: 'PONG',
+      snake: 'SNAKE', game2048: '2048', breakout: 'BREAKOUT', minesweeper: 'MINES', simon: 'SIMON',
     };
     const indicators = ['hudMusic', 'hudMusicGame'];
     indicators.forEach(id => {

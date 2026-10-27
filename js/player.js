@@ -61,8 +61,8 @@ const PlayerDB = (() => {
       avatar: avatar || '🎮',
       pin: hashPin(pin),
       coins: 0,
-      wins: { total: 0, dots: 0, ttt: 0, snl: 0, bs: 0, c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0 },
-      games: { total: 0, dots: 0, ttt: 0, snl: 0, bs: 0, c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0 },
+      wins: { total: 0, dots: 0, ttt: 0, snl: 0, bs: 0, c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0, snake: 0, game2048: 0, breakout: 0, minesweeper: 0, simon: 0 },
+      games: { total: 0, dots: 0, ttt: 0, snl: 0, bs: 0, c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0, snake: 0, game2048: 0, breakout: 0, minesweeper: 0, simon: 0 },
       streak: 0,
       created: Date.now(),
       lastSeen: Date.now(),
@@ -159,8 +159,8 @@ const PlayerDB = (() => {
       id: 'GUEST',
       avatar: '👾',
       coins: 0,
-      wins: { total: 0, dots: 0, ttt: 0, snl: 0, bs: 0, c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0 },
-      games: { total: 0, dots: 0, ttt: 0, snl: 0, bs: 0, c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0 },
+      wins: { total: 0, dots: 0, ttt: 0, snl: 0, bs: 0, c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0, snake: 0, game2048: 0, breakout: 0, minesweeper: 0, simon: 0 },
+      games: { total: 0, dots: 0, ttt: 0, snl: 0, bs: 0, c4: 0, hangman: 0, memory: 0, tetris: 0, pong: 0, snake: 0, game2048: 0, breakout: 0, minesweeper: 0, simon: 0 },
       streak: 0,
     };
     setSession(g);

@@ -335,12 +335,18 @@
   }
 
   // ── Game launch ───────────────────────────────────────────────
-  const GAME_TRACKS = { ttt: 'ttt', dots: 'dots', snl: 'snl', bs: 'ttt', c4: 'dots', hangman: 'hangman', memory: 'memory', tetris: 'tetris', pong: 'pong' };
+  const GAME_TRACKS = {
+    ttt: 'ttt', dots: 'dots', snl: 'snl', bs: 'ttt', c4: 'dots',
+    hangman: 'hangman', memory: 'memory', tetris: 'tetris', pong: 'pong',
+    snake: 'snl', game2048: 'dots', breakout: 'pong', minesweeper: 'ttt', simon: 'memory'
+  };
+
+  const SOLO_GAMES = new Set(['pong', 'tetris', 'snake', 'game2048', 'breakout', 'minesweeper', 'simon']);
 
   function launchGame(gameId, vsAI, online = false) {
-    const isAIGame = gameId === 'pong';
+    const isSolo = SOLO_GAMES.has(gameId);
     currentGame = gameId;
-    currentGameVsAI = isAIGame ? true : vsAI;
+    currentGameVsAI = isSolo ? true : vsAI;
     currentGameOnline = online && isOnlineGame(gameId);
     const player = PlayerDB.getCurrentPlayer();
     const p1 = (player && player.id !== 'GUEST') ? player.id : 'PLAYER 1';
@@ -380,11 +386,26 @@
       case 'pong':
         Pong.init(p1, 'PLAYER 2', true);
         break;
+      case 'snake':
+        Snake.init(p1);
+        break;
+      case 'game2048':
+        Game2048.init(p1);
+        break;
+      case 'breakout':
+        Breakout.init(p1);
+        break;
+      case 'minesweeper':
+        Minesweeper.init(p1);
+        break;
+      case 'simon':
+        SimonSays.init(p1);
+        break;
     }
 
     const modeBtn = document.getElementById('btnGameMode');
     if (modeBtn) {
-      if (currentGameOnline || isAIGame) {
+      if (currentGameOnline || isSolo) {
         modeBtn.style.display = 'none';
       } else {
         modeBtn.style.display = '';
@@ -420,6 +441,11 @@
         case 'memory':      MemoryMatch.restart();   break;
         case 'tetris':      Tetris.restart();        break;
         case 'pong':        Pong.restart();          break;
+        case 'snake':       Snake.restart();         break;
+        case 'game2048':    Game2048.restart();      break;
+        case 'breakout':    Breakout.restart();      break;
+        case 'minesweeper': Minesweeper.restart();   break;
+        case 'simon':       SimonSays.restart();     break;
       }
     });
 
