@@ -12,15 +12,9 @@ IN CSIT (CYBER SECURITY) / (AIML)
 
 ## SUBMITTED BY
 
-Group No: CSE-PBL-09
-
 | PRN | Name of the Student |
 |---|---|
 | 2501106155 | Shubham Salunke |
-| 2501106112 | Dristhi Gallani |
-| 2501106136 | Rishit Kinge|
-| 2501106113 | Tanvee Thakre|
-| 2501106118 | Atharva |
 
 
 ## UNDER THE GUIDANCE OF
@@ -46,15 +40,9 @@ The material borrowed from other sources and incorporated in the report has been
 
 We understand that we could be held responsible and accountable for plagiarism, if any, detected later.
 
-Group No: CSE-PBL-09
-
 Sr. No | PRN | Name | Sign
 --- | --- | --- | ---
 1 | 2501106155 | Shubham Salunke | ________
-2 | 2501106112 | Dristhi Gallani | ________
-3 | 2501106136 | Rishit Kinge| ________
-4 | 2501106113 | Tanvee Thakre| ________
-5 | 2501106118 | Atharva | ________
 
 Date: __________
 
@@ -80,7 +68,7 @@ The latest updates include a full reward-path fix for Tetris and Pong, a unified
 
 ## ACKNOWLEDGEMENT
 
-We, the members of Group CSE-PBL-09 (Shubham Salunke, Dristhi, Rishit, Tanvee, and Atharva), express our sincere gratitude to our project guide for their valuable support and guidance through the development of Retro Game Hub. We also thank our peers and mentors for their feedback during testing and the opportunity to work on this collaborative project in the Project-Based Learning program. This project has been an invaluable learning experience in full-stack web development, software architecture, and teamwork.
+I, Shubham Salunke, express my sincere gratitude to my project guide for their valuable support and guidance through the development of Retro Game Hub. I also thank my mentors for their feedback during testing and the opportunity to work on this project in the Project-Based Learning program. This project has been an invaluable learning experience in full-stack web development, software architecture, and system design.
 
 ---
 

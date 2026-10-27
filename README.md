@@ -219,14 +219,10 @@ npm run start:dev
 
 This project was conceived, designed, and implemented as part of the **Project-Based Learning (PBL)** curriculum for **Semester 2** at the **School of CSIT**.
 
-### 👥 Project Team: Group CSE-PBL-09
+### 👤 Author & Developer
 | Roll No. | PRN | Name | Role / Contributions |
 |:---:|:---:|:---|:---|
-| 01 | 2501106155 | **Shubham Salunke** | System Architecture, Game Engine Core, Full-Stack Integration |
-| 02 | 2501106112 | **Dristhi Gallani** | UI/UX Design, Front-End Game Modules & Logic |
-| 03 | 2501106136 | **Rishit Kinge** | Algorithm Design (Minimax/AI), Audio Synthesis |
-| 04 | 2501106113 | **Tanvee Thakre** | Database Persistence, State Management & Quality Testing |
-| 05 | 2501106118 | **Atharva** | Multiplayer Networking, Documentation & Presentation |
+| 01 | 2501106155 | **Shubham Salunke** | System Architecture, Game Engine Core, Full-Stack Development |
 
 ### 📚 Academic Concepts & Cross-Discipline Integration
 - **Web Technologies**: Vanilla HTML5 Canvas, CSS Grid/Flexbox, ES6+ JavaScript, Responsive Web Design, Progressive Web Apps.
@@ -253,15 +249,15 @@ This project was conceived, designed, and implemented as part of the **Project-B
 
 > ### 🏁 Final Project Declaration
 > 
-> **Retro Game Hub** stands as the definitive culmination of our Semester 2 Project-Based Learning endeavor. What began as an ambition to breathe digital life into the cherished, hand-drawn games of our school notebooks has evolved into a comprehensive, high-performance web gaming arcade.
+> **Retro Game Hub** stands as the definitive culmination of my Semester 2 Project-Based Learning endeavor. What began as an ambition to breathe digital life into the cherished, hand-drawn games of our school notebooks has evolved into a comprehensive, high-performance web gaming arcade.
 > 
-> Through this project, our team navigated the intricacies of computer science fundamentals—from algorithmic decision-making with Minimax game trees and real-time network synchronization to procedural audio synthesis and progressive web application architecture. We proved that compelling, responsive, and beautiful software does not require bloated dependencies; mastery of core web standards can deliver experiences that are both nostalgic and state-of-the-art.
+> Through this project, I navigated the intricacies of computer science fundamentals—from algorithmic decision-making with Minimax game trees and real-time network synchronization to procedural audio synthesis and progressive web application architecture. This project proves that compelling, responsive, and beautiful software does not require bloated dependencies; mastery of core web standards can deliver experiences that are both nostalgic and state-of-the-art.
 > 
-> We extend our deepest appreciation to our project guide, the faculty of the **School of CSIT**, and our peers for their invaluable critique, guidance, and encouragement throughout this journey.
+> I extend my deepest appreciation to my project guide, the faculty of the **School of CSIT**, and mentors for their invaluable critique, guidance, and encouragement throughout this journey.
 > 
 > **The Retro Game Hub repository is hereby declared feature-complete, verified, and officially finalized.**
 > 
-> *— Team CSE-PBL-09 (Shubham Salunke, Dristhi Gallani, Rishit Kinge, Tanvee Thakre, Atharva)*  
+> *— Shubham Salunke*  
 > *Pune, 2026*
 
 ---
